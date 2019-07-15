@@ -1,13 +1,12 @@
 package qfbap.spark
 
-import org.apache.spark.sql
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.slf4j.LoggerFactory
 import qfbap.conf.ConfigManager
 import qfbap.constant.constants
 import qfbap.utils.JDBCUtils
 
-object ODS2DM_USER_BASIC {
+object DM_USER_VISIT {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().appName(constants.SPARK_APP_NAME_USER).master(constants.SPARK_LOCAL).enableHiveSupport().getOrCreate()
@@ -23,7 +22,7 @@ object ODS2DM_USER_BASIC {
       val jdbcProp = JDBCUtils.getJdbcProp()._1
       val jdbcUrl = JDBCUtils.getJdbcProp()._2
       df.write.mode(SaveMode.Append).jdbc(jdbcUrl,mysqlTableName,jdbcProp)
-      df.write.mode(SaveMode.Overwrite).insertInto(hiveTableName)
+      //df.write.mode(SaveMode.Overwrite).insertInto(hiveTableName)
     }
   }
 

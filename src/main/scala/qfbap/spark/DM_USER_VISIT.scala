@@ -21,8 +21,8 @@ object DM_USER_VISIT {
       val hiveTableName = args(0)
       val jdbcProp = JDBCUtils.getJdbcProp()._1
       val jdbcUrl = JDBCUtils.getJdbcProp()._2
-      df.write.mode(SaveMode.Append).jdbc(jdbcUrl,mysqlTableName,jdbcProp)
-      //df.write.mode(SaveMode.Overwrite).insertInto(hiveTableName)
+      //df.write.mode(SaveMode.Append).jdbc(jdbcUrl,mysqlTableName,jdbcProp)
+      df.write.saveAsTable(hiveTableName)
     }
   }
 
